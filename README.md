@@ -7,14 +7,14 @@ this project was done for data system engineering class analysising Big Data. i 
 
 
 ## outputs:
-# Model 1: Recommendation model without training data 
+### Model 1: Recommendation model without training data 
 ![reccomendation output 1](https://user-images.githubusercontent.com/46978582/113816540-39464e80-9732-11eb-8bda-d2ffbe814965.png)
 
-# Model 2: Recommendation model with trained data 
+### Model 2: Recommendation model with trained data 
 
 ![reccomendation output 2](https://user-images.githubusercontent.com/46978582/113816726-6eeb3780-9732-11eb-9cc3-f5d5324bcd25.png)
 
-# Evaluating both model
+### Evaluating both model
 
 ![Evoluating both model ](https://user-images.githubusercontent.com/46978582/113816759-79a5cc80-9732-11eb-86c7-7fd08b03b178.png)
 
