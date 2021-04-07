@@ -1,3 +1,4 @@
+
 # Big-Data-Recommendation-analysis-
 
 this project was done for data system engineering class analysising Big Data. i used this dataset [books recommendation dataset](https://www.kaggle.com/arashnic/book-recommendation-dataset) found in kaggle. then i used following technology :
@@ -6,3 +7,11 @@ this project was done for data system engineering class analysising Big Data. i 
 
 
 ## outputs:
+![reccomendation output 1](https://user-images.githubusercontent.com/46978582/113816540-39464e80-9732-11eb-8bda-d2ffbe814965.png)
+
+
+![reccomendation output 2](https://user-images.githubusercontent.com/46978582/113816726-6eeb3780-9732-11eb-9cc3-f5d5324bcd25.png)
+
+![Evoluating both model ](https://user-images.githubusercontent.com/46978582/113816759-79a5cc80-9732-11eb-86c7-7fd08b03b178.png)
+
+
