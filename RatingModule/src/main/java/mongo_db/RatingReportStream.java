@@ -54,8 +54,6 @@ public class RatingReportStream implements Serializable {
 //        res.show();
 //        df.select(col("value").cast(DataTypes.StringType)).as("rating_data");
 
-
-
         StreamingQuery outQuery = res.writeStream()
                 .format("console")
                 .option(mongoDbFormat,"mongodb://127.0.0.1/rating.ratingData")

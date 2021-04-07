@@ -12,6 +12,7 @@
         <module>RatingModule</module>
         <module>userStreamModule</module>
         <module>graph_sql</module>
+        <module>recommendation_sys</module>
     </modules>
 
     <properties>

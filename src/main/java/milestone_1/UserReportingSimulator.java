@@ -30,16 +30,7 @@ public class UserReportingSimulator {
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer"); // built in serilaizable data for java object
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         Producer<String, String> producer = new KafkaProducer<>(props);
-//
-//        Logger.getLogger("org.apache").setLevel(Level.WARN);
-//        SparkConf conf = new SparkConf().setAppName("Main").setMaster("local[*]");
-//        JavaSparkContext sc = new JavaSparkContext(conf);
-//        SparkSession sparkSQL = SparkSession.builder()
-//                .appName("SparkSQL")
-//                .master("local[*]")
-//                .getOrCreate();
 
-//        data.forEach(e -> System.out.println(e));
 
         Scanner sc = new Scanner(new FileReader("src/main/resources//books_dataset/Users.csv"));
 

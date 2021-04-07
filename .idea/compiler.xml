@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="graph_sql" />
         <module name="RatingModule" />
         <module name="userStreamModule" />
+        <module name="recommendation_sys" />
+        <module name="graph_sql" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

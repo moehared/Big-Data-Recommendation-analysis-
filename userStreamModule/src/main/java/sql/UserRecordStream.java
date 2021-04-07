@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class UserRecordStream  {
+public class UserRecordStream {
     String url =
             "jdbc:mysql://localhost:3306/userData?user=root;password=Hooyo14#";
 
@@ -26,8 +26,6 @@ public class UserRecordStream  {
         Logger.getLogger("org.apache.spark.storage").setLevel(Level.ERROR);
 //        SparkConf conf = new SparkConf().setAppName("sql.UserRecordStream").setMaster("local[*]");
 //        JavaStreamingContext sc = new JavaStreamingContext(conf, Durations.seconds(2));
-
-
 
 
         // create a mysql database connection
@@ -60,7 +58,7 @@ public class UserRecordStream  {
                 .outputMode(OutputMode.Append())
 //                .foreachBatch(writeToSQL(df))
                 .foreachBatch((rowDataset, batchID) -> {
-                   if(batchID != null) {
+                    if (batchID != null) {
 
 //                       rowDataset.write()
 //                               .option("url", "jdbc:mysql://localhost:3306/")
@@ -68,139 +66,55 @@ public class UserRecordStream  {
 //                               .option("user", "root")
 //                               .option("password", "Hooyo14#")
 //                               .saveAsTable("jdbc:mysql://localhost:3306/schema.userData");
-                       rowDataset.foreach(row -> {
-                           // for each batch we recieved , converted data to json values and further do clean up
-                           JsonAST.JValue i = row.jsonValue();
+                        rowDataset.foreach(row -> {
+                            // for each batch we recieved , converted data to json values and further do clean up
+                            JsonAST.JValue i = row.jsonValue();
 //
 
 //                          // cleaning up data before we insert to sql database.
-                           // i dont think this is best practice , better to look for alernative solution
-                           // but for now , will do the job.
-                           String cleanUpData = i.values().toString().replaceAll("Map", "")
-                                   .replaceAll("\\(","")
-                                   .replaceAll("value ->","");
-                           String[] data = cleanUpData.substring(0,cleanUpData.length() - 1)
-                           .split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                            // i dont think this is best practice , better to look for alernative solution
+                            // but for now , will do the job.
+                            String cleanUpData = i.values().toString().replaceAll("Map", "")
+                                    .replaceAll("\\(", "")
+                                    .replaceAll("value ->", "");
+                            String[] data = cleanUpData.substring(0, cleanUpData.length() - 1)
+                                    .split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                           String id = data[0];
+                            String id = data[0];
 
-                           String loc = data[1];
+                            String loc = data[1];
 
-                           String age = data[2];
+                            String age = data[2];
 
 
-
-                           System.out.println("Id: " + id + "\n" + "Loc: " + loc + "\n" + "age: " + age + "\n");
+                            System.out.println("Id: " + id + "\n" + "Loc: " + loc + "\n" + "age: " + age + "\n");
 //                           System.out.println("Data is: " + data + "\n");
 
-                           try {
-                               Class.forName("com.mysql.cj.jdbc.Driver");
-                               Connection conn = DriverManager.getConnection(myUrl, "root", "Hooyo14#");
-                               // the mysql insert statement
-                               String query = "insert into userReport (userID, location, age)"
-                                       + " values (?, ?, ?)";
-                               // create the mysql insert preparedstatement
-                               PreparedStatement preparedStmt = conn.prepareStatement(query);
-                               preparedStmt.setString(1,id);
-                               preparedStmt.setString(2,loc);
-                               preparedStmt.setString(3,age);
-                               // execute the preparedstatement
-                               preparedStmt.execute();
-                               conn.close();
-                           } catch (Exception e) {
-                               System.out.println("Error occured connecting to sql " + e + "\n");
-                           }
+                            try {
+                                Class.forName("com.mysql.cj.jdbc.Driver");
+                                Connection conn = DriverManager.getConnection(myUrl, "root", "Hooyo14#");
+                                // the mysql insert statement
+                                String query = "insert into userReport (userID, location, age)"
+                                        + " values (?, ?, ?)";
+                                // create the mysql insert preparedstatement
+                                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                                preparedStmt.setString(1, id);
+                                preparedStmt.setString(2, loc);
+                                preparedStmt.setString(3, age);
+                                // execute the preparedstatement
+                                preparedStmt.execute();
+                                conn.close();
+                            } catch (Exception e) {
+                                System.out.println("Error occured connecting to sql " + e + "\n");
+                            }
 
-                       });
+                        });
 
-                   }
+                    }
                 })
                 .start();
 
         streamingQuery.awaitTermination();
 
-//
-//        for (Object o : arr) {
-//            System.out.println("Arrays object are " + o.toString());
-//        }
-
-
-
     }
-
-//    void init(Dataset rowDataset) {
-//        rowDataset.foreach(row -> {
-//            row.
-//            int id = row.fieldIndex(row.getString(1));
-//            String loc = row.getString(2);
-//            int age = row.fieldIndex(row.getString(3));
-//
-//            // the mysql insert statement
-//            String query = " insert into userReport (userID, location, age)"
-//                    + " values (?, ?, ?, ?, ?)";
-//
-//            // create the mysql insert preparedstatement
-//            PreparedStatement preparedStmt = conn.prepareStatement(query);
-//            preparedStmt.setString(1,String.valueOf(id));
-//            preparedStmt.setString(2,loc);
-//            preparedStmt.setString(3,String.valueOf(age));
-//
-//            // execute the preparedstatement
-//            preparedStmt.execute();
-//        });
-//    }
-
-//    public static VoidFunction2<Dataset<Row>, Long> writeToSQL(Dataset<Row> df) {
-//        DataFrameWriter<Row> res =
-//
-//    }
-
 }
-
-//    public void insertValues(int id,String loc,int a) {
-//        try
-//        {
-//
-//
-//
-//        }
-//        catch (Exception e)
-//        {
-//            System.err.println("Got an exception!");
-//            System.err.println(e.getMessage());
-//        }
-//    }
-
-
-
-//
-//    // LocationStrategeis.preferConsistent: consumer api that fetches massges into buffers. evenly distributes across available executors
-//    Collection<String> topics = Arrays.asList("user");
-//    // kafka param https://spark.apache.org/docs/2.1.0/streaming-kafka-0-10-integration.html
-////        Map<String,Object> params = new HashMap<>();
-//    Map<String, Object> params = new HashMap<>();
-//        params.put("bootstrap.servers","localhost:9092"); // list of kafka service connected.
-//                params.put("key.deserializer", StringDeserializer.class); // converts java object so kafka deserializer each java object
-//        params.put("value.deserializer", StringDeserializer.class); //
-//        params.put("group.id","spark-group"); // group more than one consumer. so each events , one group consumes particular message
-//        params.put("auto.offset.reset","latest"); // track te latest message consumed. start from beigning or at the latest
-//        params.put("enable.auto.commit",false); // automatically commit if it sets = true
-//
-//        JavaInputDStream<ConsumerRecord<String, String>> stream = KafkaUtils.createDirectStream(
-//        sc, LocationStrategies.PreferConsistent(),
-//        ConsumerStrategies.Subscribe(topics, params)
-//        );
-//
-//        // do work
-//        JavaDStream<String> result = stream.map(item -> item.value());
-//        result.print();
-//
-//        sc.start();;
-//        sc.awaitTermination();
-
-
-
-//
-//  if(batchID != null) {
-//
-//          }
