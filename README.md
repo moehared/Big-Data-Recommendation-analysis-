@@ -1,5 +1,5 @@
 
-# Big-Data-Recommendation-analysis-
+# Big-Data-Recommendation-sys
 
 this project was done for data system engineering class analysising Big Data. i used this dataset [books recommendation dataset](https://www.kaggle.com/arashnic/book-recommendation-dataset) found in kaggle. then i used following technology :
 * [kafka] - used for reading data from csv file and creating topics. these topics subscribed by varies database such SQL and mongoDB as data sink.  
