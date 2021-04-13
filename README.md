@@ -20,4 +20,4 @@ this project was done for data system engineering class on Big Data. i used this
 
 
 ## watch demo on Youtube
-[demo link](https://www.youtube.com/watch?v=LWZsbgLKyDc)
+[click here for demo link](https://www.youtube.com/watch?v=LWZsbgLKyDc)
